@@ -17,20 +17,18 @@
 
 ---
 
-## Day 2: Application Security (SAST & SCA)
+## Day 2: DevSecOps for Git
 
-**Focus**: Securing the code and the supply chain (dependencies).
-
-### Concepts:
-- **SAST** (Static Application Security Testing): Scanning your own code
-- **SCA** (Software Composition Analysis): Finding vulnerabilities in Open Source libraries
-- **The "Billion Dollar" Problem**: Handling Transitive Dependencies
-
-### Tool Spotlight:
-- Snyk (for SCA) and SonarQube (for SAST)
-
-### Hands-on Lab:
-- Integrate Snyk and SonarQube into a GitHub Action/GitLab pipeline to fail builds on "High" vulnerabilities
+1. .gitignore  
+2. Native Git Pre-Commit Hooks (Custom Scripts)  
+3. Block commits with Gitleaks  
+4. Gitleaks -> Repository & History Scanning  
+5. Gitleaks in GitHub Actions  
+6. Branch Protection Rules  
+7. RBAC  
+8. Mandatory Reviews  
+9. CODEOWNERS  
+10. Dependabot  
 
 ---
 
