@@ -6,7 +6,6 @@ on:
       - main
   workflow_dispatch:
 
-# Critical for OIDC: This allows the runner to request the JWT from GitHub
 permissions:
   id-token: write
   contents: read
@@ -15,6 +14,11 @@ jobs:
   terraform:
     name: "Provision Infrastructure"
     runs-on: ubuntu-latest
+    
+    # 1. SET THE WORKING DIRECTORY GLOBALLY FOR THIS JOB
+    defaults:
+      run:
+        working-directory: ./terraform
 
     steps:
       - name: Checkout Repository
@@ -23,20 +27,16 @@ jobs:
       - name: Fetch AWS Credentials from Vault
         uses: hashicorp/vault-action@v3
         with:
-          # Replace with your EC2 Public IP and Dev Port
+          # Use your EC2 Public IP and Dev Port (8200)
           url: http://44.202.202.161:8200 
           role: gh-actions-role
           method: jwt
-          # Note: Since we used iam_user, we only need ID and Secret
           secrets: |
             aws/creds/terraform-role access_key | AWS_ACCESS_KEY_ID ;
             aws/creds/terraform-role secret_key | AWS_SECRET_ACCESS_KEY
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
-
-      - name: Terraform Init
-        run: cd terraform
 
       - name: Terraform Init
         run: terraform init
